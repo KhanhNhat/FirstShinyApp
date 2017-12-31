@@ -19,11 +19,16 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput(inputId = 'y',
                   label = 'Select variable for y axis:',
-                  choices = c('mpg', 'disp', 'hp', 'wt', 'qsec'),
+                  choices = c('Miles(US) per galon' = 'mpg', 
+                              'Displacement' = 'disp', 
+                              'Horse power' = 'hp', 
+                              'Weight (1000 lbs)' = 'wt', 
+                              'Quater mile time (s)' = 'qsec'),
                   selected = 'mpg'),
       selectInput(inputId = 'col',
                   label = 'Color by:',
-                  choices = c('cyl', 'am'),
+                  choices = c('Number of cylinders' = 'cyl', 
+                              'Transmission' = 'am'),
                   selected = 'am')
     ),
     mainPanel(
