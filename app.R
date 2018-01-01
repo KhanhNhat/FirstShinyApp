@@ -32,17 +32,23 @@ ui <- fluidPage(
                   selected = 'am')
     ),
     mainPanel(
-      plotOutput(outputId = 'scatterPlot')
+      plotOutput(outputId = 'scatterPlot'),
+      dataTableOutput(outputId = 'mtcarsTable')
     )
   )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-  output$scatterPlot = renderPlot({
+  output$scatterPlot = renderPlot(
     ggplot(data = my_mtcars, aes_string(y = input$y, col = input$col)) +
       geom_point(aes(x = hp), size = 4, alpha = 0.6)
-  })
+  )
+  
+  output$mtcarsTable = renderDataTable(
+    my_mtcars,
+    options = list(pageLength = 10)
+  )
 }
 
 # Run the application 
