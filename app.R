@@ -32,7 +32,7 @@ ui <- fluidPage(
                   selected = 'am')
     ),
     mainPanel(
-      plotOutput(outputId = 'scatterPlot'),
+      plotOutput(outputId = 'scatterPlot', hover = 'plotHover'),
       dataTableOutput(outputId = 'mtcarsTable')
     )
   )
@@ -46,7 +46,7 @@ server <- function(input, output) {
   )
   
   output$mtcarsTable = renderDataTable(
-    my_mtcars,
+    nearPoints(my_mtcars, input$plotHover, xvar = 'hp', yvar = input$y),
     options = list(pageLength = 10)
   )
 }
