@@ -32,7 +32,7 @@ ui <- fluidPage(
                   selected = 'am')
     ),
     mainPanel(
-      plotOutput(outputId = 'scatterPlot'),
+      plotOutput(outputId = 'scatterPlot', brush = 'plotBrush'),
       dataTableOutput(outputId = 'mtcarsTable')
     )
   )
@@ -46,7 +46,7 @@ server <- function(input, output) {
   )
   
   output$mtcarsTable = renderDataTable(
-    my_mtcars,
+    brushedPoints(my_mtcars, brush = input$plotBrush),
     options = list(pageLength = 10)
   )
 }
