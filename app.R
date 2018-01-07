@@ -12,6 +12,7 @@ library(ggplot2)
 my_mtcars = mtcars
 my_mtcars$am = as.factor(my_mtcars$am)
 my_mtcars$cyl = as.factor(my_mtcars$cyl)
+my_mtcars = rownames_to_column(my_mtcars, var = 'car')
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -53,7 +54,9 @@ server <- function(input, output) {
   )
   
   output$mtcarsTable = renderDataTable(
-    brushedPoints(my_mtcars, brush = input$plotBrush),
+    brushedPoints(my_mtcars %>%
+                    select(car:qsec, am), 
+                    brush = input$plotBrush),
     options = list(pageLength = 10)
   )
 }
