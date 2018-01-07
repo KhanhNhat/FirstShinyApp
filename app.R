@@ -17,6 +17,7 @@ my_mtcars$cyl = as.factor(my_mtcars$cyl)
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
+      h4('Scatter plot of mtcars dataset:'),
       selectInput(inputId = 'y',
                   label = 'Select variable for y axis:',
                   choices = c('Miles(US) per galon' = 'mpg', 
