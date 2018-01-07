@@ -9,6 +9,8 @@
 
 library(shiny)
 library(ggplot2)
+library(tibble)
+library(dplyr)
 my_mtcars = mtcars
 my_mtcars$am = as.factor(my_mtcars$am)
 my_mtcars$cyl = as.factor(my_mtcars$cyl)
