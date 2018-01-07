@@ -15,3 +15,11 @@ h4{
   border-width: 2px;
   border-color: rgb(165, 170, 171);
 }
+
+#mtcarsTable{
+  border-top: solid;
+  border-width: 2px;
+  border-color: rgb(165, 170, 171);
+  padding-top: 10px;
+  margin-top: 5px;
+}
