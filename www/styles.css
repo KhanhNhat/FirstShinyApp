@@ -1,0 +1,17 @@
+h4{
+  color: rgb(84, 121, 203);
+  text-align: center;
+  padding-top: 15px;
+}
+
+.myRow{
+  background: rgb(165, 170, 171);
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.col-sm-8{
+  border-left: solid;
+  border-width: 2px;
+  border-color: rgb(165, 170, 171);
+}

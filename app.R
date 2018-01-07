@@ -15,9 +15,15 @@ my_mtcars$cyl = as.factor(my_mtcars$cyl)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  tags$header(
+    tags$link(rel = 'stylesheet', type = 'text/css', href = 'styles.css')
+    ),
+  
+  tags$div(class = 'myRow',
+    tags$h4('Scatter plot of mtcars dataset:')),
+  
   sidebarLayout(
     sidebarPanel(
-      h4('Scatter plot of mtcars dataset:'),
       selectInput(inputId = 'y',
                   label = 'Select variable for y axis:',
                   choices = c('Miles(US) per galon' = 'mpg', 
