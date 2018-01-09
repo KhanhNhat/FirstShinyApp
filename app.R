@@ -35,11 +35,16 @@ ui <- fluidPage(
                               'Weight (1000 lbs)' = 'wt', 
                               'Quater mile time (s)' = 'qsec'),
                   selected = 'mpg'),
+      
       selectInput(inputId = 'col',
                   label = 'Color by:',
                   choices = c('Number of cylinders' = 'cyl', 
                               'Transmission' = 'am'),
-                  selected = 'am')
+                  selected = 'am'),
+      
+      br(),
+      
+      downloadButton('downloadData', 'Dowload your selected data here')
     ),
     mainPanel(
       plotOutput(outputId = 'scatterPlot', brush = 'plotBrush'),
@@ -60,6 +65,14 @@ server <- function(input, output) {
                     select(car:qsec, am), 
                     brush = input$plotBrush),
     options = list(pageLength = 10)
+  )
+  
+  output$downloadData = downloadHandler(
+    filename = function(){paste0('data_', Sys.Date(),'.csv')},
+    content = function(file){
+                             write.csv(brushedPoints(my_mtcars %>% select(car:qsec, am), 
+                                                     brush = input$plotBrush),
+                             file)}
   )
 }
 
