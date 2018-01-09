@@ -1,22 +1,13 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(ggplot2)
 library(tibble)
 library(dplyr)
+
 my_mtcars = mtcars
 my_mtcars$am = as.factor(my_mtcars$am)
 my_mtcars$cyl = as.factor(my_mtcars$cyl)
 my_mtcars = rownames_to_column(my_mtcars, var = 'car')
 
-# Define UI for application that draws a histogram
 ui <- fluidPage(
   tags$header(
     tags$title('Scatter Plot of mtcars dataset'),
