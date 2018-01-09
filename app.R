@@ -57,7 +57,6 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   selectedData = reactive({
-    req(input$plotBrush)
     brushedPoints(my_mtcars %>% select(car:qsec, am),
                   brush = input$plotBrush)
   })
