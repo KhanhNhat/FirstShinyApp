@@ -48,31 +48,33 @@ ui <- fluidPage(
     ),
     mainPanel(
       plotOutput(outputId = 'scatterPlot', brush = 'plotBrush'),
-      dataTableOutput(outputId = 'mtcarsTable')
+      DT::dataTableOutput(outputId = 'mtcarsTable')
     )
   )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+  selectedData = reactive({
+    req(input$plotBrush)
+    brushedPoints(my_mtcars %>% select(car:qsec, am),
+                  brush = input$plotBrush)
+  })
+  
   output$scatterPlot = renderPlot(
     ggplot(data = my_mtcars, aes_string(y = input$y, col = input$col)) +
       geom_point(aes(x = hp), size = 4, alpha = 0.6)
   )
   
-  output$mtcarsTable = renderDataTable(
-    brushedPoints(my_mtcars %>%
-                    select(car:qsec, am), 
-                    brush = input$plotBrush),
-    options = list(pageLength = 10)
+  output$mtcarsTable = DT::renderDataTable(
+    DT::datatable(data =selectedData(),
+                 options = list(pageLength = 10),
+                 rownames = FALSE)
   )
   
   output$downloadData = downloadHandler(
     filename = function(){paste0('data_', Sys.Date(),'.csv')},
-    content = function(file){
-                             write.csv(brushedPoints(my_mtcars %>% select(car:qsec, am), 
-                                                     brush = input$plotBrush),
-                             file)}
+    content = function(file){write.csv(selectedData(), file)}
   )
 }
 
