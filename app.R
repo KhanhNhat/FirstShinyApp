@@ -19,6 +19,7 @@ my_mtcars = rownames_to_column(my_mtcars, var = 'car')
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   tags$header(
+    tags$title('Scatter Plot of mtcars dataset'),
     tags$link(rel = 'stylesheet', type = 'text/css', href = 'styles.css')
     ),
   
